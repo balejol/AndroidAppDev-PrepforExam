@@ -45,25 +45,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <com.example.egzaminui.DrawView
         android:id="@+id/draw_view"
-        class="com.example.egzaminui.DrawView"
         android:layout_width="338dp"
-        android:layout_height="250dp"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="91dp"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/circle_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/circle_btn" />
 
     <CheckBox
         android:id="@+id/fill_flag_cb"
         android:layout_width="97dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="14dp"
-        android:text="Fill"
+        android:text="Fill (doesn't work :D)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/draw_view" />
 
@@ -73,10 +68,7 @@
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:text="Clear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

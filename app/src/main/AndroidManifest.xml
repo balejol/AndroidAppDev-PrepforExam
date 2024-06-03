@@ -16,9 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Egzaminui"
         tools:targetApi="31">
+
         <activity
             android:name=".DrawingActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MultimediaActivity"
             android:exported="false" />
