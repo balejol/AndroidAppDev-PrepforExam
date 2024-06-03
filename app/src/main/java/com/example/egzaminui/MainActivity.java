@@ -9,7 +9,6 @@ import android.widget.Button; // new for button
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 //
 
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                Intent intent = new Intent(MainActivity.this, RNGActivity.class);
                 startActivity(intent);
             }
         });
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });

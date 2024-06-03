@@ -18,7 +18,7 @@ import java.util.Locale;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class ThirdActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity {
 
     private TextView currentMonthTextView;
     private CompactCalendarView compactCalendarView;
@@ -27,7 +27,7 @@ public class ThirdActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_third);
+        setContentView(R.layout.activity_calendar);
 
         currentMonthTextView = (TextView) findViewById(R.id.current_month_textView);
         compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);

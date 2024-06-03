@@ -2,7 +2,6 @@ package com.example.egzaminui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +13,7 @@ import android.widget.EditText; // new for editText
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class SecondActivity extends AppCompatActivity {
+public class RNGActivity extends AppCompatActivity {
 
     Button generateRandomNumberBtn;
     EditText insertRandomNumberEditText;
@@ -23,7 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_rng);
 
         getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
