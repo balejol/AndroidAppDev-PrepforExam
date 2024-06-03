@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 
 public class NewActivity extends AppCompatActivity {
 
-    private OpenGLView openGlView;
+    private OpenGLView openGLView;
     private CheckBox animationCheckBox;
 
     @Override
@@ -30,7 +30,7 @@ public class NewActivity extends AppCompatActivity {
     CompoundButton.OnCheckedChangeListener onAnimationCheckBoxChange = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            openGlView.setAnimationFlag(b);
+            openGLView.setAnimationFlag(b);
         }
     };
 }

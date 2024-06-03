@@ -1,5 +1,6 @@
 package com.example.egzaminui;
 
+import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -16,17 +17,16 @@ public class OpenGLView extends GLSurfaceView {
     }
 
     private void init() {
-        setEGLContextClientVersion(2);
+        setEGLContextClientVersion(3);
 
-        mRenderer = new OpenGLRender();
-        setRenderer(Renderer);
+        Renderer = new OpenGLRender();
+        setRenderer((GLSurfaceView.Renderer) Renderer);
 
         Renderer.setAnimationFlag(animationFlag);
 
-        if (getAnimationFlag() == false) {
+        if (!getAnimationFlag()) {
             setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-        }
-        else {
+        } else {
             setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
         }
     }
@@ -37,24 +37,23 @@ public class OpenGLView extends GLSurfaceView {
     private float PreviousY;
     private boolean animationFlag = false;
 
-    public void setAnimationFlag(boolean animationFlag){
+    public void setAnimationFlag(boolean animationFlag) {
         this.animationFlag = animationFlag;
         Renderer.setAnimationFlag(animationFlag);
-        if (getAnimationFlag() == false) {
+        if (!getAnimationFlag()) {
             setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-        }
-        else {
+        } else {
             setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
         }
     }
 
-    public boolean getAnimationFlag(){
+    public boolean getAnimationFlag() {
         return animationFlag;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (getAnimationFlag() == false) {
+        if (!getAnimationFlag()) {
             float x = e.getX();
             float y = e.getY();
             switch (e.getAction()) {

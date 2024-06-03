@@ -20,37 +20,43 @@ public class Triangle {
 
     float color[] =  { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
 
-    private final int Program;
+    private final int program;
 
     private final String vertexShaderCode =
-            "uniform mat4 uMVPMatrix;" + "attribute vec4 vPosition;" + "void main() {" +
-                    " gl_Position = uMVPMatrix * vPosition;" + "}";
+            "uniform mat4 uMVPMatrix;" +
+                    "attribute vec4 vPosition;" +
+                    "void main() {" +
+                    "    gl_Position = uMVPMatrix * vPosition;" +
+                    "}";
 
-    private final String fragmentCode =
-            "precision mediump float;" + "uniform vec4 vColor;" + "void main() {" +
-                    " gl_FragColor = vColor;" + "}";
+    private final String fragmentShaderCode =
+            "precision mediump float;" +
+                    "uniform vec4 vColor;" +
+                    "void main() {" +
+                    "    gl_FragColor = vColor;" +
+                    "}";
 
     private int MVPMatrixHandle;
-
-    private int PositionHandle;
-    private int ColorHandle;
+    private int positionHandle;
+    private int colorHandle;
 
     private final int vertexCount = triangleCoords.length / COORDS_PER_VERTEX;
-
     private final int vertexStride = COORDS_PER_VERTEX * 4;
 
     public Triangle() {
         ByteBuffer bb = ByteBuffer.allocateDirect(triangleCoords.length * 4);
-        bb.order()(ByteOrder.nativeOrder());
+        bb.order(ByteOrder.nativeOrder());
         vertexBuffer = bb.asFloatBuffer();
         vertexBuffer.put(triangleCoords);
         vertexBuffer.position(0);
+
         int vertexShader = OpenGLRender.loadShader(GLES30.GL_VERTEX_SHADER, vertexShaderCode);
         int fragmentShader = OpenGLRender.loadShader(GLES30.GL_FRAGMENT_SHADER, fragmentShaderCode);
-        Program = GLES30.glCreateProgram();
-        GLES30.glAttachShader(Program, vertexShader);
-        GLES30.glAttachShader(Program, fragmentShader);
-        GLES30.glLinkProgram(Program);
+
+        program = GLES30.glCreateProgram();
+        GLES30.glAttachShader(program, vertexShader);
+        GLES30.glAttachShader(program, fragmentShader);
+        GLES30.glLinkProgram(program);
     }
 
     public void draw(float[] mvpMatrix) {
@@ -60,17 +66,18 @@ public class Triangle {
         // Enable a handle to the triangle vertices
         GLES30.glEnableVertexAttribArray(positionHandle);
         // Prepare the triangle coordinate data
-        GLES30.glVertexAttribIPointer(positionHandle, COORDS_PER_VERTEX,
+        GLES30.glVertexAttribPointer(positionHandle, COORDS_PER_VERTEX,
                 GLES30.GL_FLOAT, false, vertexStride, vertexBuffer);
         // Get handle to fragment shader's vColor member
         colorHandle = GLES30.glGetUniformLocation(program, "vColor");
         // Set color for drawing the triangle
         GLES30.glUniform4fv(colorHandle, 1, color, 0);
+        // Get handle to shape's transformation matrix
         MVPMatrixHandle = GLES30.glGetUniformLocation(program, "uMVPMatrix");
         // Apply the projection and view transformation
-        GLES30.glUniform4fv(colorHandle, 1, false, mvpMatrix, 0);
+        GLES30.glUniformMatrix4fv(MVPMatrixHandle, 1, false, mvpMatrix, 0);
         // Draw the triangle
-        GLES30.glDrawArrays(GLES30.GL_TRIANGLE_FAN, 0, vertexCount);
+        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, vertexCount);
         // Disable vertex array
         GLES30.glDisableVertexAttribArray(positionHandle);
     }
