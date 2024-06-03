@@ -61,5 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //- - - Multimedia - - -
+        Button button3 = findViewById(R.id.button3);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MultimediaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-public class FourthActivity extends AppCompatActivity {
+public class MultimediaActivity extends AppCompatActivity {
 
     public static String sRecordedFileName;
 
@@ -33,7 +33,7 @@ public class FourthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fourth);
+        setContentView(R.layout.activity_multimedia);
 
         btnRec = (Button) findViewById(R.id.button_rec);
         btnPlay = (Button) findViewById(R.id.button_play);
@@ -42,6 +42,11 @@ public class FourthActivity extends AppCompatActivity {
         btnRec.setEnabled(true);
         btnPlay.setEnabled(true);
         btnStop.setEnabled(true);
+
+        btnRec.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_rec, 0, 0, 0);
+        btnPlay.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_play, 0, 0, 0);
+        //btnStop.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_stop, 0, 0, 0);
+
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -82,7 +87,7 @@ public class FourthActivity extends AppCompatActivity {
             }
             catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
-                Toast.makeText(FourthActivity.this,"Sorry! "+e.getMessage(),
+                Toast.makeText(MultimediaActivity.this,"Sorry! "+e.getMessage(),
                         Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -110,7 +115,7 @@ public class FourthActivity extends AppCompatActivity {
             }
             catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
-                Toast.makeText(FourthActivity.this,"Sorry! "+e.getMessage(),
+                Toast.makeText(MultimediaActivity.this,"Sorry! "+e.getMessage(),
                         Toast.LENGTH_SHORT).show();
                 return;
             }
