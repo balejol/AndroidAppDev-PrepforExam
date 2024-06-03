@@ -30,10 +30,10 @@
 
     <LinearLayout
         android:id="@+id/circles_layout"
-        android:layout_width="325dp"
+        android:layout_width="350dp"
         android:layout_height="425dp"
         android:layout_marginTop="16dp"
-        android:background="#4FE6E9EF"
+        android:background="#4FEEE6EF"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

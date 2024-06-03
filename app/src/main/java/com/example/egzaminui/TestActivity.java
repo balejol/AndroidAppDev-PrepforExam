@@ -67,7 +67,7 @@ public class TestActivity extends AppCompatActivity {
 
         Random random = new Random();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 1; i <= count; i++) {
             // Generate random circle parameters
             int size = random.nextInt(150) + 50; // Random size between 50 and 200
             int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)); // Random color
@@ -76,7 +76,7 @@ public class TestActivity extends AppCompatActivity {
             ImageView circle = new ImageView(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
             circle.setLayoutParams(layoutParams);
-            circle.setImageResource(R.drawable.baseline_blind_24);
+            circle.setImageResource(R.drawable.ic_rec);
             circle.setColorFilter(color);
 
             // Set random position within bounds of LinearLayout
@@ -90,4 +90,5 @@ public class TestActivity extends AppCompatActivity {
             circlesLayout.addView(circle);
         }
     }
+
 }
