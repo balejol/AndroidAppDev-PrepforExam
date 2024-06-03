@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MyListAdapter extends ArrayAdapter<Item> {
 
     private int resourceLayout;
@@ -15,14 +17,14 @@ public class MyListAdapter extends ArrayAdapter<Item> {
     public MyListAdapter(Context context, int resource, List<Item> items) {
         super(context, resource, items);
         this.resourceLayout = resource;
-        this.mContext = context;
+        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null)
-            v = LayoutInflater.from(mContext).inflate(resourceLayout, parent, false);
+            v = LayoutInflater.from(context).inflate(resourceLayout, parent, false);
 
         Item p = getItem(position);
 
