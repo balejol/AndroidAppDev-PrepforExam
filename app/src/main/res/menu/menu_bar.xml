@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<!--    res (right click) -> Android Resource Directory-->
+<!--    Resource type: menu-->
+
+<!--    menu (right click) -> Menu resource file-->
+<!--    File name: menu_bar-->
+
+    <item
+        android:id="@+id/miItem1"
+        android:title="First" />
+    <item
+        android:id="@+id/miItem2"
+        android:title="Second" />
+
+</menu>
