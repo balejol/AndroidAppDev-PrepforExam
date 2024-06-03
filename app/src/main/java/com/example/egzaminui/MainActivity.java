@@ -64,10 +64,20 @@ public class MainActivity extends AppCompatActivity {
 
         //- - - Multimedia - - -
         Button button3 = findViewById(R.id.button3);
-        button2.setOnClickListener(new View.OnClickListener() {
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MultimediaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //- - - Animation - - -
+        Button button5 = findViewById(R.id.button5);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AnimationActivity.class);
                 startActivity(intent);
             }
         });
