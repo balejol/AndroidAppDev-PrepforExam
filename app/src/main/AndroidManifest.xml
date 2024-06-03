@@ -19,7 +19,10 @@
 
         <activity
             android:name=".AnimationActivity"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".DrawingActivity"
+            android:exported="false" />
         <activity
             android:name=".MultimediaActivity"
             android:exported="false" />
