@@ -2,7 +2,16 @@ package com.example.egzaminui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 // * Sample of exam task: make an SQLITE based Doodle style app; draw a weather history curve using this API (xxx);
 // add a button which will take 4 pictures and display as 2x2 collage; draw some shapes in a predefined manner.
@@ -18,9 +27,33 @@ import android.os.Bundle;
 
 public class TestActivity extends AppCompatActivity {
 
+    Button calculateNumbersBtn;
+    EditText insertTextIntoEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        calculateNumbersBtn = findViewById(R.id.calculate_btn);
+        insertTextIntoEditText = findViewById(R.id.textField);
+
+        calculateNumbersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = insertTextIntoEditText.getText().toString().trim();
+                int lettersCount = 0;
+
+                // Loop through each character in the text and count letters
+                for (int i = 0; i < text.length(); i++) {
+                    if (Character.isLetter(text.charAt(i))) {
+                        lettersCount++;
+                    }
+                }
+
+                // Display the count of letters in a toast message
+                Toast.makeText(TestActivity.this, "Number of letters: " + lettersCount, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
