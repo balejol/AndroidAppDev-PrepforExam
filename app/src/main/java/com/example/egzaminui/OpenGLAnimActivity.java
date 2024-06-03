@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class NewActivity extends AppCompatActivity {
+public class OpenGLAnimActivity extends AppCompatActivity {
 
     private OpenGLView openGLView;
     private CheckBox animationCheckBox;
@@ -16,15 +16,21 @@ public class NewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Hide the action bar and set window flags for fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                                  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_new);
 
-        animationCheckBox = (CheckBox) findViewById(R.id.animation_CB);
+        setContentView(R.layout.activity_openglanim);
+
+        // Initialize the OpenGLView
+        openGLView = findViewById(R.id.opengl_view);
+
+        // Initialize the animation CheckBox
+        animationCheckBox = findViewById(R.id.animation_CB);
         animationCheckBox.setOnCheckedChangeListener(onAnimationCheckBoxChange);
-        openGLView = (OpenGLView) findViewById(R.id.opengl_view);
     }
 
     CompoundButton.OnCheckedChangeListener onAnimationCheckBoxChange = new CompoundButton.OnCheckedChangeListener() {

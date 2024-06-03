@@ -91,5 +91,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //- - - OpenGL ES 3.0 Triangle - - -
+        Button button6 = findViewById(R.id.button6);
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, OpenGLAnimActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
