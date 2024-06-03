@@ -2,16 +2,16 @@ package com.example.egzaminui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.util.Random;
 
 // * Sample of exam task: make an SQLITE based Doodle style app; draw a weather history curve using this API (xxx);
 // add a button which will take 4 pictures and display as 2x2 collage; draw some shapes in a predefined manner.
@@ -29,6 +29,7 @@ public class TestActivity extends AppCompatActivity {
 
     Button calculateNumbersBtn;
     EditText insertTextIntoEditText;
+    LinearLayout circlesLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class TestActivity extends AppCompatActivity {
 
         calculateNumbersBtn = findViewById(R.id.calculate_btn);
         insertTextIntoEditText = findViewById(R.id.textField);
+        circlesLayout = findViewById(R.id.circles_layout);
 
         calculateNumbersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +55,39 @@ public class TestActivity extends AppCompatActivity {
 
                 // Display the count of letters in a toast message
                 Toast.makeText(TestActivity.this, "Number of letters: " + lettersCount, Toast.LENGTH_SHORT).show();
+
+                // Draw circles
+                drawCircles(lettersCount);
             }
         });
+    }
+
+    private void drawCircles(int count) {
+        circlesLayout.removeAllViews(); // Clear previous circles
+
+        Random random = new Random();
+
+        for (int i = 0; i < count; i++) {
+            // Generate random circle parameters
+            int size = random.nextInt(150) + 50; // Random size between 50 and 200
+            int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)); // Random color
+
+            // Create circle ImageView
+            ImageView circle = new ImageView(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
+            circle.setLayoutParams(layoutParams);
+            circle.setImageResource(R.drawable.baseline_blind_24);
+            circle.setColorFilter(color);
+
+            // Set random position within bounds of LinearLayout
+            int maxWidth = circlesLayout.getWidth() - size; // Maximum width to ensure circle stays within bounds
+            int maxHeight = circlesLayout.getHeight() - size; // Maximum height to ensure circle stays within bounds
+            int leftMargin = random.nextInt(maxWidth);
+            int topMargin = random.nextInt(maxHeight);
+            layoutParams.setMargins(leftMargin, topMargin, 0, 0);
+            circle.setLayoutParams(layoutParams);
+
+            circlesLayout.addView(circle);
+        }
     }
 }
