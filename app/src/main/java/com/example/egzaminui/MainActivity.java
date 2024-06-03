@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //- - - Multimedia - - -
         Button button3 = findViewById(R.id.button3);
-        button2.setOnClickListener(new View.OnClickListener() {
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MultimediaActivity.class);
