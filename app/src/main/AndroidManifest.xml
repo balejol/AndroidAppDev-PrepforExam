@@ -17,8 +17,8 @@
         android:theme="@style/Theme.Egzaminui"
         tools:targetApi="31">
         <activity
-            android:name=".NewActivity"
-            android:exported="false" />
+            android:name=".DrawingActivity"
+            android:exported="true" />
         <activity
             android:name=".MultimediaActivity"
             android:exported="false" />

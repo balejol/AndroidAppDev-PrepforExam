@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewActivity">
+    tools:context=".DrawingActivity">
 
     <!-- First button - Triangle -->
     <Button
@@ -47,7 +47,7 @@
 
     <View
         android:id="@+id/draw_view"
-        class="DrawView"
+        class="com.example.egzaminui.DrawView"
         android:layout_width="338dp"
         android:layout_height="250dp"
         tools:layout_editor_absoluteX="36dp"

@@ -1,6 +1,13 @@
+package com.example.egzaminui;
+
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.View;
 
 public class DrawView extends View {
     private static final int NONE = 0;
@@ -43,7 +50,7 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int width = getWidth();
-        int heigth = getHeigth();
+        int heigth = getHeight();
         Paint paint;
 
         switch (figure) {
