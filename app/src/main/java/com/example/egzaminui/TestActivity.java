@@ -1,5 +1,9 @@
 package com.example.egzaminui;
 
+// > Create Virtual Device
+// > Pixel 2 | 5,0" | 1080x1920 | 420dpi
+// > Q | 29 | x86 | Android 10.0
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
