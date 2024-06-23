@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Lecture 6 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -17,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Egzaminui"
         tools:targetApi="31">
-
+        <activity
+            android:name=".FlagsActivity"
+            android:exported="true" />
         <activity
             android:name=".TestActivity"
             android:exported="true" />
@@ -45,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

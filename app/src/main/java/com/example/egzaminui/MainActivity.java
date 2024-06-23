@@ -93,11 +93,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //- - - Sample of Exam Task - - -
-        Button btn = findViewById(R.id.test_btn);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button samplBtn = findViewById(R.id.test_btn);
+        samplBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //- - - Flags (exam) - - -
+        Button flagsBtn = findViewById(R.id.flags_btn);
+        flagsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, FlagsActivity.class);
                 startActivity(intent);
             }
         });
