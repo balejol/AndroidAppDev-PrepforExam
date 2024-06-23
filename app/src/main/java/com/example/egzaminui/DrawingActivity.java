@@ -42,8 +42,8 @@ public class DrawingActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                drawView.setFigure(figure);
-                drawView.setFillFlag(fillFlag);
+//                drawView.setFigure(figure);
+//                drawView.setFillFlag(fillFlag);
                 drawView.invalidate();
             }
         });

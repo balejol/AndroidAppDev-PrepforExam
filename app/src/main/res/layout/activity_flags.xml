@@ -35,6 +35,16 @@
         android:text="Width"
         app:layout_constraintTop_toBottomOf="@+id/drawView"
         app:layout_constraintStart_toEndOf="@+id/colour_btn"
+        app:layout_constraintEnd_toStartOf="@+id/rotate_btn" />
+
+    <Button
+        android:id="@+id/rotate_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Rotate"
+        app:layout_constraintTop_toBottomOf="@+id/drawView"
+        app:layout_constraintStart_toEndOf="@+id/width_btn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button

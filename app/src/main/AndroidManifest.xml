@@ -25,9 +25,9 @@
         <activity
             android:name=".AnimationActivity"
             android:exported="false" />
-        <activity
-            android:name=".DrawingActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".DrawingActivity"-->
+<!--            android:exported="false" />false-->
         <activity
             android:name=".MultimediaActivity"
             android:exported="false" />
