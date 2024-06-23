@@ -23,7 +23,7 @@ public class FlagsActivity extends AppCompatActivity {
 
     // Declare UI components and other variables
     private DrawView drawView;
-    private Button btnColor, btnSize, btnRotate, btnSave, btnImport; // Added btnImport
+    private Button btnColor, btnSize, btnRotate, btnSave, btnImport;
     private ObjectAnimator rotation;
     float currentRotationAngle = 0;
     private int color1, color2, color3, size1, size2, size3;
@@ -39,7 +39,7 @@ public class FlagsActivity extends AppCompatActivity {
         btnSize = findViewById(R.id.width_btn);
         btnRotate = findViewById(R.id.rotate_btn);
         btnSave = findViewById(R.id.save_btn);
-        btnImport = findViewById(R.id.import_btn); // Initialize btnImport
+        btnImport = findViewById(R.id.import_btn);
 
         // Load previously saved drawing parameters
         loadDrawingParameters();
@@ -127,7 +127,7 @@ public class FlagsActivity extends AppCompatActivity {
                 }
             }
 
-            return true;  // Indicate that the touch event has been handled
+            return true; // Indicate that the touch event has been handled
         }
     };
 
