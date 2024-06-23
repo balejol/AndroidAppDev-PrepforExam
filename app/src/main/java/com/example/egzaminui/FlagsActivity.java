@@ -23,7 +23,7 @@ public class FlagsActivity extends AppCompatActivity {
 
     // Declare UI components and other variables
     private DrawView drawView;
-    private Button btnColor, btnSize, btnRotate, btnSave;
+    private Button btnColor, btnSize, btnRotate, btnSave, btnImport; // Added btnImport
     private ObjectAnimator rotation;
     float currentRotationAngle = 0;
     private int color1, color2, color3, size1, size2, size3;
@@ -34,11 +34,12 @@ public class FlagsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flags);
 
         // Initialize UI components
-        drawView = (DrawView) findViewById(R.id.drawView);
-        btnColor = (Button) findViewById(R.id.colour_btn);
-        btnSize = (Button) findViewById(R.id.width_btn);
-        btnRotate = (Button) findViewById(R.id.rotate_btn);
-        btnSave = (Button) findViewById(R.id.save_btn);
+        drawView = findViewById(R.id.drawView);
+        btnColor = findViewById(R.id.colour_btn);
+        btnSize = findViewById(R.id.width_btn);
+        btnRotate = findViewById(R.id.rotate_btn);
+        btnSave = findViewById(R.id.save_btn);
+        btnImport = findViewById(R.id.import_btn); // Initialize btnImport
 
         // Load previously saved drawing parameters
         loadDrawingParameters();
@@ -80,20 +81,27 @@ public class FlagsActivity extends AppCompatActivity {
                         drawView.getSize1(), drawView.getSize2(), drawView.getSize3());
             }
         });
+
+        // Set click listener for import button
+        btnImport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load and apply the previously saved drawing parameters
+                loadDrawingParameters();
+            }
+        });
     }
 
     // Generate a random color
     private int getRandColor() {
         Random rand = new Random();
-        int c = (Color.argb(255, rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-        return c;
+        return Color.argb(255, rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
     }
 
     // Generate a random size
     private int getRandSize() {
         Random rand = new Random();
-        int size = rand.nextInt(200) + 50;
-        return size;
+        return rand.nextInt(200) + 50;
     }
 
     // Touch listener for the rotate button
@@ -115,8 +123,7 @@ public class FlagsActivity extends AppCompatActivity {
                     rotation.start();
                 } else {
                     // Show a toast message if animation is in progress
-                    Toast toast = Toast.makeText(getApplicationContext(), "Animation in progress!", Toast.LENGTH_SHORT);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), "Animation in progress!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -154,17 +161,18 @@ public class FlagsActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 // Parse the parameters from the file
                 String[] params = line.split(",");
-                color1 = (Integer.parseInt(params[0]));
-                color2 = (Integer.parseInt(params[1]));
-                color3 = (Integer.parseInt(params[2]));
-                size1 = (Integer.parseInt(params[3]));
-                size2 = (Integer.parseInt(params[4]));
-                size3 = (Integer.parseInt(params[5]));
+                color1 = Integer.parseInt(params[0]);
+                color2 = Integer.parseInt(params[1]);
+                color3 = Integer.parseInt(params[2]);
+                size1 = Integer.parseInt(params[3]);
+                size2 = Integer.parseInt(params[4]);
+                size3 = Integer.parseInt(params[5]);
             }
             reader.close();
 
             // Set the parameters to the DrawView
             drawView.setCircleParams(color1, color2, color3, size1, size2, size3);
+            Toast.makeText(this, "Drawing parameters loaded.", Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
             e.printStackTrace();
