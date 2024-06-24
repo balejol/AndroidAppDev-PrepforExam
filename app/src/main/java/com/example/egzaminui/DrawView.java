@@ -15,6 +15,7 @@ public class DrawView extends View {
 
     private int color1, color2, color3;
     private int size1, size2, size3;
+    private int[] colors, sizes; // TestActivity
 
     private int rotDegree = 0;
 
@@ -101,6 +102,45 @@ public class DrawView extends View {
 
         //canvas.restore();
     }
+
+
+
+    public void setCircleParams(int[] colors, int[] sizes) {
+        this.colors = colors;
+        this.sizes = sizes;
+        invalidate(); // Trigger onDraw to redraw with new parameters
+    }
+//    @Override
+//    protected void onDraw(Canvas canvas) {
+//        super.onDraw(canvas);
+//
+//        if (colors == null || sizes == null || colors.length != sizes.length) {
+//            return; // Exit if colors or sizes arrays are not properly initialized
+//        }
+//
+//        Paint paint = new Paint();
+//
+//        canvas.save();
+//        canvas.rotate(rotDegree);
+//
+//        int top = 200; // Initial top position for the first circle
+//        for (int i = 0; i < colors.length; i++) {
+//            paint.setColor(colors[i]);
+//            paint.setStyle(Paint.Style.FILL);
+//
+//            int circleSize = sizes[i];
+//            int left = (getWidth() - circleSize) / 2; // Center horizontally
+//
+//            canvas.drawCircle(left + circleSize / 2, top + circleSize / 2, circleSize / 2, paint);
+//
+//            // Adjust top position for the next circle
+//            top += circleSize;
+//        }
+//
+//        canvas.restore();
+//    }
+
+
 
 // - - - For Drawing Activity
 
@@ -195,4 +235,5 @@ public class DrawView extends View {
 //            default: break;
 //        }
 //    }
+
 }

@@ -39,7 +39,7 @@ public class TestActivity extends AppCompatActivity {
 
     Button calculateNumbersBtn, saveBtn, loadBtn;
     EditText insertTextIntoEditText;
-    LinearLayout circlesLayout;
+    DrawView drawView;
     StringBuilder currentDrawingParams;
 
     @Override
@@ -49,7 +49,7 @@ public class TestActivity extends AppCompatActivity {
 
         calculateNumbersBtn = findViewById(R.id.calculate_btn);
         insertTextIntoEditText = findViewById(R.id.textField);
-        circlesLayout = findViewById(R.id.circles_layout);
+        drawView = findViewById(R.id.draw_view);
         saveBtn = findViewById(R.id.save_btn);
         loadBtn = findViewById(R.id.load_btn);
 
@@ -89,28 +89,20 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void drawCircles(int count) {
-        circlesLayout.removeAllViews();
         Random random = new Random();
         currentDrawingParams = new StringBuilder();
+        int[] sizes = new int[count];
+        int[] colors = new int[count];
 
         for (int i = 0; i < count; i++) {
             int size = random.nextInt(100) + 50;
             int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-            View circle = new View(this);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
-            int maxWidth = circlesLayout.getWidth() - size;
-            int maxHeight = circlesLayout.getHeight() - size;
-            int leftMargin = random.nextInt(maxWidth);
-            int topMargin = random.nextInt(maxHeight);
-            layoutParams.setMargins(leftMargin, topMargin, 0, 0);
-            circle.setLayoutParams(layoutParams);
-            circle.setBackgroundColor(color);
-
-            circlesLayout.addView(circle);
-
-            currentDrawingParams.append(size).append(",").append(color).append(",").append(leftMargin).append(",").append(topMargin).append("\n");
+            sizes[i] = size;
+            colors[i] = color;
+            currentDrawingParams.append(size).append(",").append(color).append("\n");
         }
+
+        drawView.setCircleParams(colors, sizes);
     }
 
     private void saveDrawingParameters() {
@@ -141,23 +133,22 @@ public class TestActivity extends AppCompatActivity {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
-            circlesLayout.removeAllViews();
+            int count = 0;
+            StringBuilder sb = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                String[] params = line.split(",");
-                int size = Integer.parseInt(params[0]);
-                int color = Integer.parseInt(params[1]);
-                int leftMargin = Integer.parseInt(params[2]);
-                int topMargin = Integer.parseInt(params[3]);
-
-                View circle = new View(this);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
-                layoutParams.setMargins(leftMargin, topMargin, 0, 0);
-                circle.setLayoutParams(layoutParams);
-                circle.setBackgroundColor(color);
-
-                circlesLayout.addView(circle);
+                sb.append(line).append("\n");
+                count++;
             }
             reader.close();
+            String[] params = sb.toString().split("\n");
+            int[] colors = new int[count];
+            int[] sizes = new int[count];
+            for (int i = 0; i < count; i++) {
+                String[] data = params[i].split(",");
+                sizes[i] = Integer.parseInt(data[0]);
+                colors[i] = Integer.parseInt(data[1]);
+            }
+            drawView.setCircleParams(colors, sizes);
             Toast.makeText(this, "Drawing parameters loaded.", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();

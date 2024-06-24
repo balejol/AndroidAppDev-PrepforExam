@@ -28,13 +28,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textField" />
 
-    <LinearLayout
-        android:id="@+id/circles_layout"
+    <com.example.egzaminui.DrawView
+        android:id="@+id/draw_view"
         android:layout_width="350dp"
         android:layout_height="400dp"
         android:layout_marginTop="16dp"
         android:background="#4FEEE6EF"
-        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculate_btn" />
@@ -46,7 +45,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circles_layout">
+        app:layout_constraintTop_toBottomOf="@+id/draw_view">
 
         <Button
             android:id="@+id/save_btn"
