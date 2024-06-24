@@ -19,6 +19,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+// Nupieškite vėliavą naudodami canvas (2), pridėkite animaciją (pvz. sukimąsi (1)), pridėkite mygtuką, kad būtų
+// galima keisti kiekvieno šios konstrukcijos elemento storį (1), pridėkite mygtukus, kad būtų galima išsaugoti
+// (išsaugoti programoje) (1) ir įkelti (1) jūsų vėliavos atvaizdus (su pakoreguotomis spalvomis / storiu),
+// pridėkite mygtuką, kad būtų galima išsaugoti jūsų vėliavos atvaizdą (su pakoreguotomis spalvomis / storiu) į
+// išorinį (1) (ne programoje), naršomą xml failą (1) ir funkciją, kad būtų galima peržiūrėti ir įkelti šį failą (1).
+
 public class FlagsActivity extends AppCompatActivity {
 
     // Declare UI components and other variables

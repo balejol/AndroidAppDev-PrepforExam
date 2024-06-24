@@ -13,33 +13,29 @@ import androidx.annotation.Nullable;
 
 public class DrawView extends View {
 
+    // Variables to hold colors and sizes of circles :
     private int color1, color2, color3;
     private int size1, size2, size3;
-    private int[] colors, sizes; // TestActivity
+    private int[] colors, sizes; // Arrays to hold multiple circle colors and sizes for the TestActivity
 
-    private int rotDegree = 0;
+    private int rotDegree = 0; // Rotation degree for canvas
 
+    // Getters for individual circle colors and sizes :
     public int getColor1() {
         return color1;
     }
-
     public int getColor2() {
         return color2;
     }
-
     public int getColor3() {
         return color3;
     }
-
     public int getSize1() {
         return size1;
     }
-
     public int getSize2() {
         return size2;
     }
-
-
     public int getSize3() {
         return size3;
     }
@@ -48,23 +44,24 @@ public class DrawView extends View {
         return rotDegree;
     }
 
+    // Setter for rotation degree and invalidate to trigger redraw
     public void setRotDegree(int rotDegree) {
         this.rotDegree = rotDegree;
-        invalidate();
+        invalidate(); // Redraw the view with new rotation degree
     }
 
+    // Constructors for DrawView class :
     public DrawView(Context context) {
         super(context);
     }
-
     public DrawView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
+    // Method to set individual circle parameters
     public void setCircleParams(int c1, int c2, int c3, int s1, int s2, int s3) {
         this.color1 = c1;
         this.color2 = c2;
@@ -72,34 +69,41 @@ public class DrawView extends View {
         this.size1 = s1;
         this.size2 = s2;
         this.size3 = s3;
-        invalidate();
+        invalidate(); // Trigger onDraw to redraw with new parameters
     }
 
+    // Override method for drawing on the canvas
     @Override
     protected void onDraw(Canvas canvas){
-        super.onDraw(canvas);
+        super.onDraw(canvas); // Call superclass method first
 
-        Paint paint1, paint2, paint3;
+        // Save the canvas state
         canvas.save();
 
+        // Rotate the canvas based on rotDegree
         canvas.rotate(rotDegree);
 
-        paint1 = new Paint();
-        paint2 = new Paint();
-        paint3 = new Paint();
+        // Initialize Paint objects for each circle
+        Paint paint1 = new Paint();
+        Paint paint2 = new Paint();
+        Paint paint3 = new Paint();
 
+        // Set colors for each Paint object
         paint1.setColor(color1);
         paint2.setColor(color2);
         paint3.setColor(color3);
 
+        // Set style to fill for each Paint object
         paint1.setStyle(Paint.Style.FILL);
         paint2.setStyle(Paint.Style.FILL);
         paint3.setStyle(Paint.Style.FILL);
 
+        // Draw rectangles (representing circles) on the canvas with respective sizes and colors
         canvas.drawRect(200, 200, 800, 200+size1, paint1);
         canvas.drawRect(200, 200+size1, 800, 200+size1+size2, paint2);
         canvas.drawRect(200, 200+size1+size2, 800, 200+size1+size2+size3, paint3);
 
+        // Restore the canvas to its original state
         //canvas.restore();
     }
 
@@ -110,6 +114,9 @@ public class DrawView extends View {
         this.sizes = sizes;
         invalidate(); // Trigger onDraw to redraw with new parameters
     }
+
+// Uncomment vvv for TestActivity to work
+
 //    @Override
 //    protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);

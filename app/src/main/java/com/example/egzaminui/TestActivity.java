@@ -88,6 +88,7 @@ public class TestActivity extends AppCompatActivity {
         // loadDrawingParameters();
     }
 
+    // Method to draw circles on the drawView based on input count
     private void drawCircles(int count) {
         Random random = new Random();
         currentDrawingParams = new StringBuilder();
@@ -105,6 +106,7 @@ public class TestActivity extends AppCompatActivity {
         drawView.setCircleParams(colors, sizes);
     }
 
+    // Method to save drawing parameters to a file
     private void saveDrawingParameters() {
         if (currentDrawingParams == null || currentDrawingParams.length() == 0) {
             Toast.makeText(this, "No drawing parameters to save.", Toast.LENGTH_SHORT).show();
@@ -123,6 +125,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
+    // Method to load drawing parameters from a file
     private void loadDrawingParameters() {
         File file = new File(getExternalFilesDir(null), "drawing_parameters.txt");
         if (!file.exists()) {
