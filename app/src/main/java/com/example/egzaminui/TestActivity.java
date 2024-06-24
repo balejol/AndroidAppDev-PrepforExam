@@ -15,6 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 // * Sample of exam task: make an SQLITE based Doodle style app; draw a weather history curve using this API (xxx);
@@ -31,9 +37,10 @@ import java.util.Random;
 
 public class TestActivity extends AppCompatActivity {
 
-    Button calculateNumbersBtn;
+    Button calculateNumbersBtn, saveBtn, loadBtn;
     EditText insertTextIntoEditText;
     LinearLayout circlesLayout;
+    StringBuilder currentDrawingParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class TestActivity extends AppCompatActivity {
         calculateNumbersBtn = findViewById(R.id.calculate_btn);
         insertTextIntoEditText = findViewById(R.id.textField);
         circlesLayout = findViewById(R.id.circles_layout);
+        saveBtn = findViewById(R.id.save_btn);
+        loadBtn = findViewById(R.id.load_btn);
 
         calculateNumbersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,49 +59,109 @@ public class TestActivity extends AppCompatActivity {
                 String text = insertTextIntoEditText.getText().toString().trim();
                 int lettersCount = 0;
 
-                // Loop through each character in the text and count letters
                 for (int i = 0; i < text.length(); i++) {
                     if (Character.isLetter(text.charAt(i))) {
                         lettersCount++;
                     }
                 }
 
-                // Display the count of letters in a toast message
                 Toast.makeText(TestActivity.this, "Number of letters: " + lettersCount, Toast.LENGTH_SHORT).show();
-
-                // Draw circles
                 drawCircles(lettersCount);
             }
         });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveDrawingParameters();
+            }
+        });
+
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDrawingParameters();
+            }
+        });
+
+        // Uncomment this line if you want to load the saved drawing parameters on activity creation
+        // loadDrawingParameters();
     }
 
     private void drawCircles(int count) {
-        circlesLayout.removeAllViews(); // Clear previous circles
-
+        circlesLayout.removeAllViews();
         Random random = new Random();
+        currentDrawingParams = new StringBuilder();
 
-        for (int i = 1; i <= count; i++) {
-            // Generate random circle parameters
-            int size = random.nextInt(150) + 50; // Random size between 50 and 200
-            int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)); // Random color
+        for (int i = 0; i < count; i++) {
+            int size = random.nextInt(100) + 50;
+            int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
 
-            // Create circle ImageView
-            ImageView circle = new ImageView(this);
+            View circle = new View(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
-            circle.setLayoutParams(layoutParams);
-            circle.setImageResource(R.drawable.ic_rec);
-            circle.setColorFilter(color);
-
-            // Set random position within bounds of LinearLayout
-            int maxWidth = circlesLayout.getWidth() - size; // Maximum width to ensure circle stays within bounds
-            int maxHeight = circlesLayout.getHeight() - size; // Maximum height to ensure circle stays within bounds
+            int maxWidth = circlesLayout.getWidth() - size;
+            int maxHeight = circlesLayout.getHeight() - size;
             int leftMargin = random.nextInt(maxWidth);
             int topMargin = random.nextInt(maxHeight);
             layoutParams.setMargins(leftMargin, topMargin, 0, 0);
             circle.setLayoutParams(layoutParams);
+            circle.setBackgroundColor(color);
 
             circlesLayout.addView(circle);
+
+            currentDrawingParams.append(size).append(",").append(color).append(",").append(leftMargin).append(",").append(topMargin).append("\n");
         }
     }
 
+    private void saveDrawingParameters() {
+        if (currentDrawingParams == null || currentDrawingParams.length() == 0) {
+            Toast.makeText(this, "No drawing parameters to save.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        File file = new File(getExternalFilesDir(null), "drawing_parameters.txt");
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(currentDrawingParams.toString());
+            writer.close();
+            Toast.makeText(this, "Drawing parameters saved.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to save drawing parameters.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadDrawingParameters() {
+        File file = new File(getExternalFilesDir(null), "drawing_parameters.txt");
+        if (!file.exists()) {
+            Toast.makeText(this, "No saved drawing parameters found.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            circlesLayout.removeAllViews();
+            while ((line = reader.readLine()) != null) {
+                String[] params = line.split(",");
+                int size = Integer.parseInt(params[0]);
+                int color = Integer.parseInt(params[1]);
+                int leftMargin = Integer.parseInt(params[2]);
+                int topMargin = Integer.parseInt(params[3]);
+
+                View circle = new View(this);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
+                layoutParams.setMargins(leftMargin, topMargin, 0, 0);
+                circle.setLayoutParams(layoutParams);
+                circle.setBackgroundColor(color);
+
+                circlesLayout.addView(circle);
+            }
+            reader.close();
+            Toast.makeText(this, "Drawing parameters loaded.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to load drawing parameters.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
